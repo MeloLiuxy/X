@@ -30,16 +30,17 @@ lottie_coding = load_lottieurl("https://assets3.lottiefiles.com/packages/lf20_o6
 留言文件 = "messages.json"
 
 # 获取历史留言的函数
-def load_messages():
-    if os.path.exists(留言文件):
-        with open(留言文件, "r", encoding="utf-8") as f:
-            return f.readlines()
-    return []
+def load_messages(user):
+    if user not in st.session_state:
+        st.session_state[user] = []
+    return st.session_state[user]
 
 # 保存留言的函数
 def save_message(user, message):
-    with open(留言文件, "a", encoding="utf-8") as f:
-        f.write(f"User: {user} - Message: {message}\n")
+    # 将留言存储在session state中
+    if user not in st.session_state:
+        st.session_state[user] = []
+    st.session_state[user].append(f"User: {user} - Message: {message}")
 
 # ----------- 验证码输入部分 -----------
 if "captcha_verified" not in st.session_state:
@@ -114,9 +115,21 @@ if st.session_state.captcha_verified:
         st.header("说了啥")
         st.write("##")
 
-        messages = load_messages()
-        if messages:
-            for message in messages:
+        # 分别加载每个用户的留言
+        lxy_messages = load_messages("lxy")
+        yx_messages = load_messages("yx")
+
+        st.write("### lxy的留言")
+        if lxy_messages:
+            for message in lxy_messages:
                 st.write(message)
         else:
             st.write("No messages yet.")
+
+        st.write("### yx的留言")
+        if yx_messages:
+            for message in yx_messages:
+                st.write(message)
+        else:
+            st.write("No messages yet.")
+
