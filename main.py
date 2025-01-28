@@ -1,12 +1,25 @@
 import streamlit as st
 import requests
 import os
+import json
 from streamlit_lottie import st_lottie
 from PIL import Image
 import io
 
 # 设置页面配置
 st.set_page_config(page_title="堡~", page_icon="🍔", layout="wide")
+
+# 设置背景色为 #FFE2FA
+st.markdown(
+    """
+    <style>
+    body {
+        background-color: #FFE2FA;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 # 预设验证码
 correct_captcha = "lxyx"
@@ -33,13 +46,26 @@ lottie_coding = load_lottieurl("https://assets3.lottiefiles.com/packages/lf20_o6
 def load_messages():
     if os.path.exists(留言文件):
         with open(留言文件, "r", encoding="utf-8") as f:
-            return f.readlines()
+            return json.load(f)
     return []
 
 # 保存留言的函数
 def save_message(user, message):
-    with open(留言文件, "a", encoding="utf-8") as f:
-        f.write(f"User: {user} - Message: {message}\n")
+    # 读取现有的留言数据
+    messages = load_messages()
+    
+    # 创建新的留言数据
+    new_message = {
+        "user": user,
+        "message": message
+    }
+    
+    # 将新的留言添加到留言数据中
+    messages.append(new_message)
+    
+    # 将留言数据保存到文件
+    with open(留言文件, "w", encoding="utf-8") as f:
+        json.dump(messages, f, ensure_ascii=False, indent=4)
 
 # ----------- 验证码输入部分 -----------
 if "captcha_verified" not in st.session_state:
@@ -117,6 +143,7 @@ if st.session_state.captcha_verified:
         messages = load_messages()
         if messages:
             for message in messages:
-                st.write(message)
+                st.write(f"User: {message['user']} - Message: {message['message']}")
         else:
             st.write("No messages yet.")
+
