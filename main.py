@@ -25,7 +25,6 @@ lottie_coding = load_lottieurl("https://assets3.lottiefiles.com/packages/lf20_o6
 # ---- 文件和留言设置 ----
 留言文件 = "messages.json"
 
-
 # 获取历史留言
 def load_messages():
     if os.path.exists(留言文件):
@@ -48,7 +47,6 @@ with st.container():
 
 # ------------What We Do------------------
 
-
 # ----------------------------My Message to You------------------
 
 # ---- 留言功能 ----
@@ -63,11 +61,18 @@ with st.container():
     # 留言
     user_message = st.text_area("今天想说什么🐱:", height=150)
 
-    if st.button("点这里提交（最好是好听的话）💓👅"):
-        if user_message:
-            # 保存留言
-            save_message(user, user_message)
-            st.success("说出来的话不能撤回的!")
+    # 验证码输入
+    captcha_input = st.text_input("请输入验证码: lxyx", max_chars=4)
+
+    # 验证用户输入的验证码是否正确
+    if captcha_input == "lxyx":
+        if st.button("点这里提交（最好是好听的话）💓👅"):
+            if user_message:
+                # 保存留言
+                save_message(user, user_message)
+                st.success("说出来的话不能撤回的!")
+    else:
+        st.warning("验证码错误，请重新输入!")
 
 # ---- 显示历史留言 ----
 with st.container():
@@ -81,3 +86,4 @@ with st.container():
             st.write(message)
     else:
         st.write("No messages yet.")
+
