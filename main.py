@@ -61,19 +61,31 @@ if not st.session_state.captcha_verified:
 if st.session_state.captcha_verified:
     # ----------- 头像上传部分 -----------
     st.write("### 头像上传")
-    
-    # 上传第一个头像
-    uploaded_file1 = st.file_uploader("上传头像 1", type=["png", "jpg", "jpeg"], key="avatar1")
-    uploaded_file2 = st.file_uploader("上传头像 2", type=["png", "jpg", "jpeg"], key="avatar2")
 
-    # 如果文件存在，显示头像
-    if uploaded_file1 is not None:
-        image1 = Image.open(uploaded_file1)
-        st.image(image1, caption="头像 1", width=100, use_column_width=False)
+    # 上传头像图片
+    uploaded_image = st.file_uploader("上传头像", type=["png", "jpg", "jpeg"])
 
-    if uploaded_file2 is not None:
-        image2 = Image.open(uploaded_file2)
-        st.image(image2, caption="头像 2", width=100, use_column_width=False)
+    # 如果上传了头像，显示圆形头像
+    if uploaded_image is not None:
+        image = Image.open(uploaded_image)
+        st.image(image, caption="头像", use_column_width=True)
+
+        # 使用 CSS 使头像显示为圆形
+        st.markdown(
+            f"""
+            <style>
+            .uploaded-avatar {{
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                object-fit: cover;
+                border: 3px solid #fff;
+            }}
+            </style>
+            <img src="data:image/png;base64,{st.base64_encode(uploaded_image.read()).decode()}" class="uploaded-avatar"/>
+            """,
+            unsafe_allow_html=True
+        )
 
     # -----------Header section------------
     with st.container():
