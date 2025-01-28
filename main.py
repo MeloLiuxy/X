@@ -47,7 +47,6 @@ if "captcha_verified" not in st.session_state:
 
 # 如果验证码没有通过，显示验证码输入框
 if not st.session_state.captcha_verified:
-    # 使用 type="password" 使验证码输入为密码形式
     captcha_input = st.text_input("请输入验证码", max_chars=4, type="password")
     
     # 如果验证码正确，设置状态为已验证
