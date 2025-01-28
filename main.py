@@ -4,7 +4,7 @@ import os
 from streamlit_lottie import st_lottie
 
 # 设置页面配置
-st.set_page_config(page_title="开心哦", page_icon="🍔", layout="wide")
+st.set_page_config(page_title="堡~", page_icon="🍔", layout="wide")
 
 # 预设验证码
 correct_captcha = "lxyx"
