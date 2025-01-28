@@ -2,6 +2,8 @@ import streamlit as st
 import requests
 import os
 from streamlit_lottie import st_lottie
+from PIL import Image
+import io
 
 # 设置页面配置
 st.set_page_config(page_title="堡~", page_icon="🍔", layout="wide")
@@ -51,12 +53,28 @@ if not st.session_state.captcha_verified:
     # 如果验证码正确，设置状态为已验证
     if captcha_input == correct_captcha:
         st.session_state.captcha_verified = True
-        st.success("您来了🧎🏽‍♀️‍➡️")
+        st.success("验证码正确，欢迎进入！")
     elif captcha_input:
-        st.warning("敲错门啦🚪")
+        st.warning("验证码错误，请重新输入!")
 
 # 如果验证码验证通过，展示网页内容
 if st.session_state.captcha_verified:
+    # ----------- 头像上传部分 -----------
+    st.write("### 头像上传")
+    
+    # 上传第一个头像
+    uploaded_file1 = st.file_uploader("上传头像 1", type=["png", "jpg", "jpeg"], key="avatar1")
+    uploaded_file2 = st.file_uploader("上传头像 2", type=["png", "jpg", "jpeg"], key="avatar2")
+
+    # 如果文件存在，显示头像
+    if uploaded_file1 is not None:
+        image1 = Image.open(uploaded_file1)
+        st.image(image1, caption="头像 1", width=100, use_column_width=False)
+
+    if uploaded_file2 is not None:
+        image2 = Image.open(uploaded_file2)
+        st.image(image2, caption="头像 2", width=100, use_column_width=False)
+
     # -----------Header section------------
     with st.container():
         st.subheader("🩷🩵👩🏽‍❤️‍👩🏻😻🌃")  # 更改为情侣介绍
@@ -97,5 +115,4 @@ if st.session_state.captcha_verified:
                 st.write(message)
         else:
             st.write("No messages yet.")
-
 
