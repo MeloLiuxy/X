@@ -51,9 +51,9 @@ if not st.session_state.captcha_verified:
     # 如果验证码正确，设置状态为已验证
     if captcha_input == correct_captcha:
         st.session_state.captcha_verified = True
-        st.success("验证码正确，欢迎进入！")
+        st.success("您来了🧎🏽‍♀️‍➡️")
     elif captcha_input:
-        st.warning("验证码错误，请重新输入!")
+        st.warning("敲错门啦🚪")
 
 # 如果验证码验证通过，展示网页内容
 if st.session_state.captcha_verified:
