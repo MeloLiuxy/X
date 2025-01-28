@@ -9,17 +9,17 @@ upload_dir = "uploaded_photos"
 if not os.path.exists(upload_dir):
     os.makedirs(upload_dir)
 
-# 自定义像素风格的CSS样式
+# 自定义蓝色和粉色配色的CSS样式
 st.markdown("""
     <style>
     body {
-        background-color: #222222;
+        background-color: #1a1a1a;
         font-family: 'Press Start 2P', cursive;
         color: #FFFFFF;
     }
     .title {
         font-size: 36px;
-        color: #FF00FF;
+        color: #FF69B4; /* 粉色 */
         text-align: center;
         margin-bottom: 20px;
         font-weight: bold;
@@ -27,14 +27,14 @@ st.markdown("""
     }
     .subheader {
         font-size: 24px;
-        color: #FFFF00;
+        color: #00BFFF; /* 蓝色 */
         margin-bottom: 20px;
         font-weight: bold;
         text-shadow: 1px 1px #000000;
     }
     .message {
         background-color: #333333;
-        border: 3px solid #FF00FF;
+        border: 3px solid #FF69B4; /* 粉色 */
         border-radius: 10px;
         padding: 15px;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
@@ -42,9 +42,9 @@ st.markdown("""
         font-size: 18px;
     }
     .button {
-        background-color: #FF00FF;
+        background-color: #FF69B4; /* 粉色 */
         color: white;
-        border: 3px solid #FF00FF;
+        border: 3px solid #FF69B4; /* 粉色 */
         border-radius: 5px;
         padding: 10px 20px;
         font-size: 18px;
@@ -53,13 +53,13 @@ st.markdown("""
         text-shadow: 1px 1px #000000;
     }
     .button:hover {
-        background-color: #FFFF00;
+        background-color: #00BFFF; /* 蓝色 */
         color: #222222;
-        border-color: #FFFF00;
+        border-color: #00BFFF; /* 蓝色 */
     }
     .card {
         background-color: #444444;
-        border: 3px solid #FF00FF;
+        border: 3px solid #FF69B4; /* 粉色 */
         border-radius: 10px;
         padding: 20px;
         margin-bottom: 20px;
@@ -80,7 +80,7 @@ st.markdown("""
         background-color: #555555;
         padding: 20px;
         border-radius: 10px;
-        border: 3px solid #FF00FF;
+        border: 3px solid #FF69B4; /* 粉色 */
     }
     </style>
 """, unsafe_allow_html=True)
