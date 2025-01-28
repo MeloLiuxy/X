@@ -7,13 +7,32 @@ import io
 import streamlit as st
 
 # 设置页面配置，包含自定义主题
-st.set_page_config(page_title="堡~", page_icon="🍔", layout="wide", 
-                   initial_sidebar_state="auto", 
-                   theme={
-                       "backgroundColor": "#ffd5f1",  # 设置背景色
-                       "secondaryBackgroundColor": "#ffffff",  # 设置第二背景色
-                       "textColor": "#000000",  # 设置文本颜色
-                   })
+st.set_page_config(
+    page_title="堡~", 
+    page_icon="🍔", 
+    layout="wide", 
+    initial_sidebar_state="auto", 
+    theme={
+        "backgroundColor": "#ffd5f1",  # 设置背景色
+        "secondaryBackgroundColor": "#ffffff",  # 设置第二背景色
+        "textColor": "#000000",  # 设置文本颜色
+    }
+)
+
+# 设置自定义CSS来进一步调整样式
+st.markdown(
+    """
+    <style>
+    .streamlit-expanderHeader {
+        color: #000000;
+    }
+    .sidebar .sidebar-content {
+        background-color: #ffffff;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 # 页面内容
 st.write("这是一个带有自定义背景色的页面")
