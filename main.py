@@ -8,17 +8,10 @@ import io
 # 设置页面配置
 st.set_page_config(page_title="堡~", page_icon="🍔", layout="wide")
 
-# 设置背景色为 #F9E4EF，确保在页面加载时正确应用
-st.markdown(
-    """
-    <style>
-    body {
-        background-color: #F9E4EF !important;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+[theme]
+backgroundColor="#ffd5f1"
+secondaryBackgroundColor="#ffffff"
+textColor="#000000"
 
 # 预设验证码
 correct_captcha = "lxyx"
