@@ -60,7 +60,7 @@ if not st.session_state.captcha_verified:
 # 如果验证码验证通过，展示网页内容
 if st.session_state.captcha_verified:
     # ----------- 头像部分（圆形图片）-----------
-    st.write("### 头像展示")
+    st.write("### 俺俩👩🏻‍🤝‍👩🏽")
 
     # 图片的GitHub URL地址
     avatar_url = "https://github.com/MeloLiuxy/X/raw/9464f13f9e85f4699296587dda01cd1ae82ecd14/%E4%BF%BA%E4%BF%A9.jpg"
