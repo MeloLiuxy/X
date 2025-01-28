@@ -59,33 +59,30 @@ if not st.session_state.captcha_verified:
 
 # 如果验证码验证通过，展示网页内容
 if st.session_state.captcha_verified:
-    # ----------- 头像上传部分 -----------
-    st.write("### 头像上传")
+    # ----------- 头像部分（圆形图片）-----------
+    st.write("### 头像展示")
 
-    # 上传头像图片
-    uploaded_image = st.file_uploader("上传头像", type=["png", "jpg", "jpeg"])
-
-    # 如果上传了头像，显示圆形头像
-    if uploaded_image is not None:
-        image = Image.open(uploaded_image)
-        st.image(image, caption="头像", use_column_width=True)
-
-        # 使用 CSS 使头像显示为圆形
-        st.markdown(
-            f"""
-            <style>
-            .uploaded-avatar {{
-                width: 100px;
-                height: 100px;
-                border-radius: 50%;
-                object-fit: cover;
-                border: 3px solid #fff;
-            }}
-            </style>
-            <img src="data:image/png;base64,{st.base64_encode(uploaded_image.read()).decode()}" class="uploaded-avatar"/>
-            """,
-            unsafe_allow_html=True
-        )
+    # 图片的GitHub URL地址
+    avatar_url = "https://github.com/your-username/repository-name/raw/main/俺俩.jpg"
+    
+    # 显示图片
+    st.image(avatar_url, caption="头像", width=100)
+    
+    # 使用CSS样式将图片设置为圆形
+    st.markdown(
+        f"""
+        <style>
+        .uploaded-avatar {{
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }}
+        </style>
+        <img src="{avatar_url}" class="uploaded-avatar"/>
+        """,
+        unsafe_allow_html=True
+    )
 
     # -----------Header section------------
     with st.container():
@@ -127,4 +124,3 @@ if st.session_state.captcha_verified:
                 st.write(message)
         else:
             st.write("No messages yet.")
-
