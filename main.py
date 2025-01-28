@@ -207,7 +207,7 @@ particle_effect_html = """
 """
 
 # 将粒子效果嵌入到Streamlit中
-components.html(particle_effect_html, height=700)
+components.html(particle_effect_html, height=800)
 
 # 显示网页标题
 st.markdown('<div class="title">💑 欢迎来到我们的情侣个人网页 💑</div>', unsafe_allow_html=True)
@@ -241,8 +241,6 @@ with col1:
             st.markdown('<div class="message">嗯呐~</div>', unsafe_allow_html=True)
         else:
             st.markdown('<div class="message">写啊！</div>', unsafe_allow_html=True)
-
-
 
 # 展示历史留言
 st.markdown("""
