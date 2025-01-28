@@ -105,7 +105,7 @@ if st.session_state.captcha_verified:
 
     # -----------Header section------------
     with st.container():
-        st.subheader("🩷🩵👩🏽‍❤️‍👩🏻😻🌃")  # 更改为情侣介绍
+        st.subheader("\U0001F90F\U0001F90D\U0001F469\U0001F3FD\U0000200D\U0001F491\U0000200D\U0001F469\U0001F3FB\U0001F63B\U0001F303")
         st.title("🐯🐍")
         st.write("每天！必须！多喜欢我一点！")
 
