@@ -8,6 +8,8 @@ import streamlit as st
 
 import streamlit as st
 
+import streamlit as st
+
 # 设置页面配置
 st.set_page_config(page_title="堡~", page_icon="🍔", layout="wide")
 
@@ -16,19 +18,22 @@ st.markdown(
     """
     <style>
     body {
-        background-color: #ffd5f1;
-        color: #000000;
+        background-color: #ffd5f1 !important;
+        color: #000000 !important;
     }
     .streamlit-expanderHeader {
-        color: #000000;
+        color: #000000 !important;
     }
     .sidebar .sidebar-content {
-        background-color: #ffffff;
+        background-color: #ffffff !important;
     }
     </style>
     """,
     unsafe_allow_html=True
 )
+
+
+
 
 
 # 预设验证码
