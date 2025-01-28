@@ -6,12 +6,30 @@ from PIL import Image
 import io
 
 # 设置页面配置
-st.set_page_config(page_title="堡~", page_icon="🍔", layout="wide")
+st.set_page_config(
+    page_title="堡~", 
+    page_icon="🍔", 
+    layout="wide"
+)
 
-[theme]
-backgroundColor="#ffd5f1"
-secondaryBackgroundColor="#ffffff"
-textColor="#000000"
+# 设置自定义主题颜色
+st.markdown(
+    """
+    <style>
+    body {
+        background-color: #ffd5f1;
+        color: #000000;
+    }
+    .streamlit-expanderHeader {
+        color: #000000;
+    }
+    .sidebar .sidebar-content {
+        background-color: #ffffff;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 # 预设验证码
 correct_captcha = "lxyx"
