@@ -1,5 +1,6 @@
 import streamlit as st
 import os
+import streamlit.components.v1 as components
 
 # 设置网页标题
 st.set_page_config(page_title="情侣个人网页", page_icon="💑", layout="wide")
@@ -13,15 +14,16 @@ if not os.path.exists(upload_dir):
 st.markdown("""
     <style>
     body {
-        background-color: #1a1a1a;
+        margin: 0;
         font-family: 'Press Start 2P', cursive;
         color: #FFFFFF;
+        overflow: hidden;
     }
     .title {
         font-size: 36px;
         color: #FF69B4; /* 粉色 */
         text-align: center;
-        margin-bottom: 20px;
+        margin-top: 50px;
         font-weight: bold;
         text-shadow: 2px 2px #000000;
     }
@@ -84,6 +86,128 @@ st.markdown("""
     }
     </style>
 """, unsafe_allow_html=True)
+
+# 粒子效果的 HTML 和 JS
+particle_effect_html = """
+<!DOCTYPE html>
+<html>
+<head>
+    <title>高级粒子效果</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: #000;
+        }
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        const particles = [];
+        const particleCount = 100;
+        const mouse = { x: null, y: null };
+
+        class Particle {
+            constructor() {
+                this.reset();
+                this.baseSize = 2;
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = -1 + Math.random() * 2;
+                this.vy = -1 + Math.random() * 2;
+                this.radius = this.baseSize + Math.random() * 2;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `hsl(${(this.x/canvas.width)*360}, 70%, 50%)`;
+                ctx.fill();
+            }
+
+            update() {
+                const dx = mouse.x - this.x;
+                const dy = mouse.y - this.y;
+                const distance = Math.sqrt(dx*dx + dy*dy);
+                const force = (canvas.width/2 - distance) / canvas.width/2;
+
+                if (distance < canvas.width/2) {
+                    this.x += dx * force * 0.1;
+                    this.y += dy * force * 0.1;
+                }
+
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+
+                this.radius = this.baseSize + Math.abs(Math.sin(Date.now()*0.001 + this.x)) * 2;
+            }
+        }
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+
+        canvas.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+
+        function animate() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach((p1, i) => {
+                p1.update();
+                p1.draw();
+
+                particles.slice(i).forEach(p2 => {
+                    const dx = p1.x - p2.x;
+                    const dy = p1.y - p2.y;
+                    const distance = Math.sqrt(dx*dx + dy*dy);
+
+                    if (distance < 100) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `hsl(${(i/particleCount)*360}, 70%, 50%)`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(p1.x, p1.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.stroke();
+                    }
+                });
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>
+"""
+
+# 将粒子效果嵌入到Streamlit中
+components.html(particle_effect_html, height=700)
 
 # 显示网页标题
 st.markdown('<div class="title">💑 欢迎来到我们的情侣个人网页 💑</div>', unsafe_allow_html=True)
