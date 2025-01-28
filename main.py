@@ -45,19 +45,9 @@ lottie_coding = load_lottieurl("https://assets3.lottiefiles.com/packages/lf20_o6
 # 获取历史留言的函数
 def load_messages():
     if os.path.exists(留言文件):
-        try:
-            with open(留言文件, "r", encoding="utf-8") as f:
-                return json.load(f)
-        except json.JSONDecodeError:
-            # 如果解析失败，返回空列表并初始化文件
-            with open(留言文件, "w", encoding="utf-8") as f:
-                json.dump([], f, ensure_ascii=False, indent=4)
-            return []
-    else:
-        # 如果文件不存在，创建文件并返回空列表
-        with open(留言文件, "w", encoding="utf-8") as f:
-            json.dump([], f, ensure_ascii=False, indent=4)
-        return []
+        with open(留言文件, "r", encoding="utf-8") as f:
+            return json.load(f)
+    return []
 
 # 保存留言的函数
 def save_message(user, message):
