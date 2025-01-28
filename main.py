@@ -65,9 +65,6 @@ if st.session_state.captcha_verified:
     # 图片的GitHub URL地址
     avatar_url = "https://github.com/your-username/repository-name/raw/main/俺俩.jpg"
     
-    # 显示图片
-    st.image(avatar_url, caption="头像", width=100)
-    
     # 使用CSS样式将图片设置为圆形
     st.markdown(
         f"""
