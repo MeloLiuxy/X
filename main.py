@@ -8,12 +8,12 @@ import io
 # 设置页面配置
 st.set_page_config(page_title="堡~", page_icon="🍔", layout="wide")
 
-# 设置背景色为 #F9E4EF
+# 设置背景色为 #F9E4EF，确保在页面加载时正确应用
 st.markdown(
     """
     <style>
     body {
-        background-color: #F9E4EF;
+        background-color: #F9E4EF !important;
     }
     </style>
     """,
