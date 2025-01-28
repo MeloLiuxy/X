@@ -30,10 +30,6 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# 页面内容
-st.write("这是一个带有自定义背景色的页面")
-
-
 
 # 预设验证码
 correct_captcha = "lxyx"
