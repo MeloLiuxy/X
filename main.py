@@ -4,7 +4,7 @@ import os
 from streamlit_lottie import st_lottie
 
 # 设置页面配置
-st.set_page_config(page_title="开心哦", page_icon="🐈🐑", layout="wide")
+st.set_page_config(page_title="开心哦", page_icon="🐈", layout="wide")
 
 # 预设验证码
 correct_captcha = "lxyx"
@@ -45,7 +45,7 @@ if "captcha_verified" not in st.session_state:
 
 # 如果验证码没有通过，显示验证码输入框
 if not st.session_state.captcha_verified:
-    captcha_input = st.text_input("请输入验证码: lxyx", max_chars=4)
+    captcha_input = st.text_input("请输入验证码", max_chars=4)
     
     # 如果验证码正确，设置状态为已验证
     if captcha_input == correct_captcha:
